@@ -26,21 +26,9 @@
 /app/.idea/
 /app/gradle/local.properties
 
-/app/facebook/build/
-
-crashlytics-build.properties
-com_crashlytics_export_strings.xml
 
 .gradle/
 app/.release.properties.bak
 app/.release.properties.values
 build/
-facebook/build/
 local.properties
-
-# fastlane specific
-fastlane/report.xml
-
-# fastlane orchestrator_instrumentation_test
-fastlane/orchestrator.apk
-fastlane/test-services.apk
