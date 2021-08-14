@@ -1,4 +1,4 @@
-package com.example.PassionfruitOrangeGuava
+package com.pog.passionfruitOrangeGuava
 
 import org.junit.Test
 
