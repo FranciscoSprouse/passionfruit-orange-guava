@@ -7,4 +7,8 @@
     <color name="pog_orange">#ffff9c55</color>
     <color name="pog_red">#ffff6057</color>
     <color name="pog_salmon">#ffffbfbc</color>
+
+    <color name="pog_orange_dark">#ff663e22</color>
+    <color name="pog_red_dark">#ff662622</color>
+    <color name="pog_salmon_dark">#ff664c4b</color>
 </resources>
