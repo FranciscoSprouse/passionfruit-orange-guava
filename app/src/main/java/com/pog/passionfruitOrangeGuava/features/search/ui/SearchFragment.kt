@@ -51,11 +51,7 @@ class SearchFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.errorMessage.observe(viewLifecycleOwner, {
-            Toast.makeText(context, it, Toast.LENGTH_LONG).show()
-        })
-
-        viewModel.userList.observe(viewLifecycleOwner, {
-            Log.d("paco", it.firstOrNull().toString())
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
     }
 }
