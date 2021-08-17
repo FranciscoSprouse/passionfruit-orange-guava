@@ -1,15 +1,15 @@
 package com.pog.passionfruitOrangeGuava.networking
 
+import com.pog.passionfruitOrangeGuava.Constants.ACCEPT_PARAM
 import com.pog.passionfruitOrangeGuava.networking.apimodel.UserResponse
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
 
 interface PogApiService {
-
     @GET("users/{username}")
     suspend fun getUser(
-        @Header("accept") accept: String = "application/vnd.github.v3+json",
+        @Header("accept") accept: String = ACCEPT_PARAM,
         @Path("username") username: String
     ): UserResponse
 }

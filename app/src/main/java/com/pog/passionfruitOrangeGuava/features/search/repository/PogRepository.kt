@@ -16,7 +16,7 @@ class PogRepository @Inject constructor(val remoteDataSource: PogApiService)  {
         emit(StateLoading())
         val response = remoteDataSource.getUser(username = username)
         // Ideally we would use some sort of mapper to map the api objects to the actual model objects
-        val responseAsModelObject = UserSearchModel(response.publicRepos)
+        val responseAsModelObject = UserSearchModel(response.login, response.avatarURL, response.publicRepos)
         emit(StateSuccess(responseAsModelObject))
     }
 }

@@ -17,6 +17,9 @@ import com.pog.passionfruitOrangeGuava.ui.MainActivity
 import javax.inject.Inject
 
 class SearchFragment: Fragment() {
+    val adapter: SearchListAdapter by lazy {
+        SearchListAdapter()
+    }
     val layoutResourceId: Int
         get() = R.layout.fragment_search
 
@@ -39,18 +42,16 @@ class SearchFragment: Fragment() {
             false
         )
         binding.setVariable(BR.viewmodel, viewModel)
+        binding.setVariable(BR.fragment, this)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel.errorMessage.observe(viewLifecycleOwner, {
             Toast.makeText(context, it, Toast.LENGTH_LONG).show()
-        })
-
-        viewModel.isLoading.observe(viewLifecycleOwner, {
-            Log.d("paco", it.toString())
         })
 
         viewModel.userList.observe(viewLifecycleOwner, {

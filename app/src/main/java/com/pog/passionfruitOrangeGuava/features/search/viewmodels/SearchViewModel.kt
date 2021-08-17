@@ -7,6 +7,7 @@ import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import com.pog.passionfruitOrangeGuava.features.search.model.UserSearchModel
 import com.pog.passionfruitOrangeGuava.features.search.repository.PogRepository
+import com.pog.passionfruitOrangeGuava.features.search.ui.SearchListAdapter
 import com.pog.passionfruitOrangeGuava.networking.ResponseState
 import com.pog.passionfruitOrangeGuava.networking.StateFailed
 import com.pog.passionfruitOrangeGuava.networking.StateLoading
@@ -16,16 +17,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 /*
  * ViewModel for the Search feature
- * This is my first attempt at using Sealed Classes, Coroutines, and Flows; it might not
- * contain best practices.
+ * This is my first attempt at using Coroutines, and Flows; it might not contain best practices.
  */
 class SearchViewModel @Inject constructor(val repo: PogRepository): ViewModel() {
     val nameInput = MutableLiveData<String>()
+    val userList = MutableLiveData<List<UserSearchModel>>()
+    val isLoading = MutableLiveData<Boolean>().apply { this.postValue(false) }
+    val errorMessage = MutableLiveData<String>()
 
     init {
         launchSearchCoroutine()
@@ -39,9 +43,9 @@ class SearchViewModel @Inject constructor(val repo: PogRepository): ViewModel() 
     fun launchSearchCoroutine() {
         viewModelScope.launch {
             var job: Job? = null
-            // Ideally we would wait a second after a user types to run this
             nameInput.asFlow()
                 .distinctUntilChanged()
+                .debounce(300L)
                 .collect { username ->
                     job?.cancel()
                     job = launch(Dispatchers.IO) {
@@ -81,8 +85,4 @@ class SearchViewModel @Inject constructor(val repo: PogRepository): ViewModel() 
         isLoading.postValue(false)
 
     }
-
-    val userList = MutableLiveData<List<UserSearchModel>>()
-    val isLoading = MutableLiveData<Boolean>().apply { this.postValue(false) }
-    val errorMessage = MutableLiveData<String>()
 }
