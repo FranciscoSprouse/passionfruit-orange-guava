@@ -3,7 +3,7 @@
     <data>
         <variable
             name="obj"
-            type="com.pog.passionfruitOrangeGuava.features.search.model.UserSearchModel" />
+            type="com.pog.passionfruitOrangeGuava.features.search.model.UserModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"

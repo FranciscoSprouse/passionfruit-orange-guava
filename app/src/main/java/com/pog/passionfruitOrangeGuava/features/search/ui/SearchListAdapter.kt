@@ -7,7 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.pog.passionfruitOrangeGuava.BR
 import com.pog.passionfruitOrangeGuava.R
-import com.pog.passionfruitOrangeGuava.features.search.model.UserSearchModel
+import com.pog.passionfruitOrangeGuava.features.search.model.UserModel
 
 class SearchListAdapter() : RecyclerView.Adapter<SearchListAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,7 +21,7 @@ class SearchListAdapter() : RecyclerView.Adapter<SearchListAdapter.ViewHolder>()
         return ViewHolder(binding)
     }
 
-    var items: List<UserSearchModel> = listOf()
+    var items: List<UserModel> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()

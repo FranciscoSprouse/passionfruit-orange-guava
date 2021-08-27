@@ -1,14 +1,11 @@
 package com.pog.passionfruitOrangeGuava.features.search.viewmodels
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
-import com.pog.passionfruitOrangeGuava.features.search.model.UserSearchModel
+import com.pog.passionfruitOrangeGuava.features.search.model.UserModel
 import com.pog.passionfruitOrangeGuava.features.search.repository.PogRepository
-import com.pog.passionfruitOrangeGuava.features.search.ui.SearchListAdapter
-import com.pog.passionfruitOrangeGuava.networking.ResponseState
 import com.pog.passionfruitOrangeGuava.networking.StateFailed
 import com.pog.passionfruitOrangeGuava.networking.StateLoading
 import com.pog.passionfruitOrangeGuava.networking.StateSuccess
@@ -27,7 +24,7 @@ import kotlinx.coroutines.launch
  */
 class SearchViewModel @Inject constructor(val repo: PogRepository): ViewModel() {
     val nameInput = MutableLiveData<String>()
-    val userList = MutableLiveData<List<UserSearchModel>>()
+    val userList = MutableLiveData<List<UserModel>>()
     val isLoading = MutableLiveData<Boolean>().apply { this.postValue(false) }
     val errorMessage = MutableLiveData<String>()
 
@@ -49,7 +46,7 @@ class SearchViewModel @Inject constructor(val repo: PogRepository): ViewModel() 
                 .collect { username ->
                     job?.cancel()
                     job = launch(Dispatchers.IO) {
-                        repo.getUser(username).catch { error ->
+                        repo.searchUsers(username).catch { error ->
                             emit(StateFailed(message = error.message))
                         }.collect { state ->
                             when (state) {
@@ -75,9 +72,9 @@ class SearchViewModel @Inject constructor(val repo: PogRepository): ViewModel() 
         errorMessage.postValue(error)
     }
 
-    fun onSearchSuccess(user: UserSearchModel?) {
-        user?.let {
-            userList.postValue(listOf(user))
+    fun onSearchSuccess(users: List<UserModel>?) {
+        users?.let {
+            userList.postValue(it)
         } ?: kotlin.run {
             // Ideally this string would be in a resource file and would be better tailored to an end user
             errorMessage.postValue("Something went wrong, user found but not found")

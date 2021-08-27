@@ -12,6 +12,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.pog.passionfruitOrangeGuava.BR
 import com.pog.passionfruitOrangeGuava.R
+import com.pog.passionfruitOrangeGuava.databinding.FragmentSearchBinding
 import com.pog.passionfruitOrangeGuava.features.search.viewmodels.SearchViewModel
 import com.pog.passionfruitOrangeGuava.ui.MainActivity
 import javax.inject.Inject
@@ -35,14 +36,9 @@ class SearchFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: ViewDataBinding = DataBindingUtil.inflate(
-            inflater,
-            layoutResourceId,
-            container,
-            false
-        )
-        binding.setVariable(BR.viewmodel, viewModel)
-        binding.setVariable(BR.fragment, this)
+        val binding = FragmentSearchBinding.inflate(inflater, container, false)
+        binding.fragment = this
+        binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }

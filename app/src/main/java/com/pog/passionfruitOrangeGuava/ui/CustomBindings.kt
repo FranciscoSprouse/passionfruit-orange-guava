@@ -5,7 +5,7 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.pog.passionfruitOrangeGuava.features.search.model.UserSearchModel
+import com.pog.passionfruitOrangeGuava.features.search.model.UserModel
 import com.pog.passionfruitOrangeGuava.features.search.ui.SearchListAdapter
 import com.squareup.picasso.Picasso
 
@@ -20,7 +20,7 @@ fun setAdapter(recyclerView: RecyclerView, adapter: RecyclerView.Adapter<*>) {
 }
 
 @BindingAdapter("setItems")
-fun setItems(recyclerView: RecyclerView, items: List<UserSearchModel>?) {
+fun setItems(recyclerView: RecyclerView, items: List<UserModel>?) {
     if (items == null) return
     (recyclerView.adapter as SearchListAdapter?)?.let {
         Log.d("paco", items.firstOrNull().toString())
