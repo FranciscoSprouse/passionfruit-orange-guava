@@ -49,9 +49,10 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
     implementation "com.squareup.picasso:picasso:2.71828"
 
-    //LifeCycle
+    // Lifecycle Components
     implementation 'androidx.lifecycle:lifecycle-common:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
 
     // Nav Component
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
